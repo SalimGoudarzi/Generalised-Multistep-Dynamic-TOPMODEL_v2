@@ -70,7 +70,7 @@ else
   NB                   = max(B(:));
 end
 %channel network (ch) and channel reach/segments IDs (R)
-[R,ch]                 = channel_reaches(DEMx,FDxs,CHthresh);
+[R,ch]                 = channel_reaches(DEMx,FDxs,CHthresh,cs);
 %--------------------------------------------------------------------------
 %                              Topographic index
 %--------------------------------------------------------------------------
@@ -373,7 +373,7 @@ function DEMx=burn_channel_network(DEMx,cs,CHthresh)
 %calculate mult flow direction 
 FDx                  = FLOWobj(DEMx,'type','single');
 %channel network
-[~,ch]               = channel_reaches(DEMx,FDx,CHthresh);
+[~,ch]               = channel_reaches(DEMx,FDx,CHthresh,cs);
 %multi flow accumulation 
 Axs                  = flowacc(FDx);
 %upslope contributing area
