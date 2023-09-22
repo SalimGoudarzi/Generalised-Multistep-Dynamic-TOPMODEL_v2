@@ -1,6 +1,6 @@
-function [R,ch,NR]=channel_reaches(DEM,FDs,thresh)
+function [R,ch,NR]=channel_reaches(DEM,FDs,thresh,cs)
 %get stream object
-S        = STREAMobj(FDs,'minarea',thresh);
+S        = STREAMobj(FDs,'minarea',ceil(thresh./cs^2));
 %split at intersections
 S        = split(S);
 if not(isempty(S.ix))
