@@ -1,4 +1,27 @@
 function [alpha,e,ic,icd] = phreatic_surface_slope_M8(DEM,cs,Href)
+%activate paralell pool
+PATH                          = pwd;
+FOLDER                        = '\DATA\';
+%--------------------------------------------------------------------------
+p = gcp('nocreate');
+if isempty(p)
+    %check if a  pool is open
+    defaultProfile = parallel.defaultClusterProfile;
+    %get cluster profile
+    myCluster      = parcluster(defaultProfile);
+    %close it
+    delete(myCluster.Jobs)
+    %get cluster profile
+    c              = parcluster();
+    %set path to matlab default
+    cd(c.JobStorageLocation);
+    %start parpool
+    parpool(maxNumCompThreads)
+    %redefine storage location
+    c.JobStorageLocation = [PATH FOLDER];
+    %change current directory
+    cd(PATH)
+end
 %nan IDs
 nanID     = isnan(DEM.Z);
 %non-NaN cell ids to be evaluated
