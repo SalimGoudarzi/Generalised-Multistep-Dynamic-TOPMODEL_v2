@@ -18,7 +18,7 @@ DEMx.Z               = double(DEMx.Z);
 FDxs                 = FLOWobj(DEMx,'type','single');
 %single flow accumulation for surface
 Axs                  = flowacc(FDxs);
-ix                   = find(Axs==max(Axs));
+ix                   = find(Axs==max(Axs(:)));
 B0                   = dependencemap(FDxs,ix);
 DEMx.Z(B0==0)        = NaN;
 %--------------------------------------------------------------------------
